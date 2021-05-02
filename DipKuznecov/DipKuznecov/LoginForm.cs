@@ -113,5 +113,11 @@ namespace DipKuznecov
             //Ввод данных для авторизации и проверка существующего пользователя=====
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+            //очистить поля логи и пароль
+            login_field.Text = "";
+            pass_field.Text = "";
+        }
     }
 }
