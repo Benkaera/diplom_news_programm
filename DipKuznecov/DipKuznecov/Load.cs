@@ -19,7 +19,7 @@ namespace DipKuznecov
         int startpoint = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            startpoint += 4;
+            startpoint += 5;
             progressBar1.Value = startpoint;
             if (progressBar1.Value>=100)
             { 

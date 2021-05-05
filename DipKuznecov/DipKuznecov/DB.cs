@@ -14,9 +14,13 @@ namespace DipKuznecov
 
         public void openConnection()
         {
+
+             
             //Открытие соединения
             if (connection.State == System.Data.ConnectionState.Closed)
                 connection.Open();
+            
+            
         }
 
         public void closeConnection()

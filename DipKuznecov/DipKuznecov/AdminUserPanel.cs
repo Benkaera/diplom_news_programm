@@ -21,6 +21,8 @@ namespace DipKuznecov
 
         public void LoadDataToTable() 
         { //показ таблицы
+            usertableUA.Rows.Clear();
+            usertableUA.Refresh();
             DB db = new DB();
 
             DataTable table = new DataTable();
@@ -52,14 +54,6 @@ namespace DipKuznecov
             reader.Close();
 
 
-
-
-            //для нажатия и появления данных слева в столбцах добавления
-            //MySqlCommandBuilder builder = new MySqlCommandBuilder(adapter);
-            //var ds = new DataSet();
-            //adapter.SelectCommand = command;
-            //adapter.Fill(ds);
-            //usertableUA.DataSource = ds.Tables[0];
             db.closeConnection();
 
 
@@ -85,16 +79,7 @@ namespace DipKuznecov
             otchUA.Text = row.Cells[5].Value.ToString();
             dolzhUA.Text = row.Cells[6].Value.ToString();
             roleUA.Text = row.Cells[7].Value.ToString();
-
-
-            //idUA.Text = usertableUA.SelectedRows[1].Cells[0].Value.ToString();
-            //loginUA.Text = usertableUA.SelectedRows[1].Cells[1].Value.ToString();
-            //.Text = usertableUA.SelectedRows[1].Cells[2].Value.ToString();
-            //.Text = usertableUA.SelectedRows[1].Cells[3].Value.ToString();
-            //.Text = usertableUA.SelectedRows[1].Cells[4].Value.ToString();
-            // .Text = usertableUA.SelectedRows[1].Cells[5].Value.ToString();
-            // .Text = usertableUA.SelectedRows[1].Cells[6].Value.ToString();
-            // .Text = usertableUA.SelectedRows[1].Cells[7].Value.ToString();
+             
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -112,6 +97,66 @@ namespace DipKuznecov
         {
             //Цвет при наведении на крестик
             label2.ForeColor = Color.White;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //кнопка удаления
+            try 
+            {
+                if (idUA.Text == "")
+                {
+                    MessageBox.Show("Выберите пользователя для удаления");
+                }
+                else 
+                {
+                    DB db = new DB();
+                    DataTable table = new DataTable();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    db.openConnection();
+
+                    string query = " delete from users where id=" + idUA.Text +"";
+                    MySqlCommand command = new MySqlCommand(query, db.GetConnection());
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Пользователь удален успешно");
+                    
+
+                    db.closeConnection();
+                    LoadDataToTable();
+                }
+
+            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //кнопка редактирования
+            try 
+            {
+
+                if (idUA.Text == "" || loginUA.Text == "" || passUA.Text == "" || famUA.Text == "" || imyaUA.Text == "" || otchUA.Text == "" || dolzhUA.Text == "" || roleUA.Text == "")
+                { MessageBox.Show("Проверьте данные"); }
+                else
+                {
+                    DB db = new DB();
+                    DataTable table = new DataTable();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    db.openConnection();
+
+                    string query = "update users set login='" + loginUA.Text + "', pass='" + passUA.Text + "', familiya='" + famUA.Text + "',imya='" + imyaUA.Text + "',otchestvo='" + otchUA.Text + "',dolzhnost='" + dolzhUA.Text + "',role='" + roleUA.Text + "' where id ='" + idUA.Text + "' ";
+                    MySqlCommand command = new MySqlCommand(query, db.GetConnection());
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Данные пользователя обновлены успешно");
+                    db.closeConnection();
+                    LoadDataToTable();
+                }
+            } 
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
