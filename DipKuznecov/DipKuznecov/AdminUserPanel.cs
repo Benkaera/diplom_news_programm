@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net; //API
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Collections.Specialized;
 
 namespace DipKuznecov
 {
     public partial class AdminUserPanel : Form
     {
+        WebClient client = new WebClient();//API
         public AdminUserPanel()
         {
             InitializeComponent();
@@ -156,7 +159,55 @@ namespace DipKuznecov
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //кнопка добавить
 
+            
+            try
+            {
+
+                if (idUA.Text == "" || loginUA.Text == "" || passUA.Text == "" || famUA.Text == "" || imyaUA.Text == "" || otchUA.Text == "" || dolzhUA.Text == "" || roleUA.Text == "")
+                { MessageBox.Show("Проверьте данные"); }
+                else
+                {
+                    //NameValueCollection UserInfo = new NameValueCollection();//API
+                    //UserInfo.Add("id", idUA.Text);
+                    //UserInfo.Add("login", loginUA.Text);
+                    //UserInfo.Add("pass", passUA.Text);
+                    //UserInfo.Add("familiya", famUA.Text);
+
+                    //UserInfo.Add("imya", imyaUA.Text);
+                    //UserInfo.Add("otchestvo", otchUA.Text);
+                    //UserInfo.Add("dolzhnost", dolzhUA.Text);
+                    //UserInfo.Add("role", roleUA.Text);
+
+                    //byte[] InsertUser = client.UploadValues("http://localhost:81/index.php", "POST", UserInfo);
+
+                    //client.Headers.Add("Content-Type", "binary/octet-stream");
+
+                    string id = idUA.Text;
+                    string login = loginUA.Text;
+                    string pass = passUA.Text;
+                    string familiya = famUA.Text;
+
+                    string imya = imyaUA.Text;
+                    string otchestvo = otchUA.Text;
+                    string dolzhnost = dolzhUA.Text;
+                    string role = roleUA.Text;
+
+                    string URL = "http://localhost:81/index.php?id=" + id + "&login=" + login+ "&pass=" + pass + "&familiya=" + familiya + "&imya=" + imya + "&otchestvo=" + otchestvo + "&dolzhnost=" + dolzhnost + "&role=" + role;
+
+                    using (WebClient client = new WebClient())
+                    {
+                        string src = client.DownloadString(URL);
+                        MessageBox.Show("Пользователь добавлен");
+                    }
+
+                        LoadDataToTable();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message);
+                MessageBox.Show(imyaUA.Text);
+            }
         }
     }
 }
