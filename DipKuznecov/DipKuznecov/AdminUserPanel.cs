@@ -209,5 +209,10 @@ namespace DipKuznecov
                 MessageBox.Show(imyaUA.Text);
             }
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            label11.Text = DateTime.Today.Day.ToString() + "/" + DateTime.Today.Month.ToString() + "/" + DateTime.Today.Year.ToString();
+        }
     }
 }

@@ -93,21 +93,74 @@ namespace DipKuznecov
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL AND `pass` = @uP", db.GetConnection());
-            command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginUser;
-            command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passUser;
+            //MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL AND `pass` = @uP", db.GetConnection());
+            //command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginUser;
+            //command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passUser;
 
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
+            //adapter.SelectCommand = command;
+            //adapter.Fill(table);
 
-            if (table.Rows.Count > 0)
-            {
-                this.Hide();
-                MainForm mf = new MainForm();
-                mf.Show();
+            //if (table.Rows.Count > 0)
+            //{
+
+                //проверка выбранной роли(Админ или менеджер)
+                if (role_pick.SelectedIndex > -1)
+                {
+
+                    if (role_pick.SelectedItem.ToString() == "Админ")
+                    {
+                        MySqlCommand command_admin_role_find = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL AND `pass` = @uP AND `role`= 'Admin'", db.GetConnection());
+                        command_admin_role_find.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginUser;
+                        command_admin_role_find.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passUser;
+                    adapter.SelectCommand = command_admin_role_find;
+                    adapter.Fill(table);
 
 
-            }
+                    if (table.Rows.Count > 0)
+                        {
+                            //если найдена запись в таблице с таким логином и паролем + полем админ
+                            this.Hide();
+                            AdminPanel adm_pan = new AdminPanel();
+                            adm_pan.Show();
+                        }else
+                    MessageBox.Show("Данный пользователь не является администратором");
+
+                }
+                    if (role_pick.SelectedItem.ToString() == "Менеджер")
+                    {
+
+                        MySqlCommand command_user_role_find = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL AND `pass` = @uP AND `role`= 'User'", db.GetConnection());
+                        command_user_role_find.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginUser;
+                        command_user_role_find.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passUser;
+                    adapter.SelectCommand = command_user_role_find;
+                    adapter.Fill(table);
+
+
+                    if (table.Rows.Count > 0)
+                        {
+                            //если найдена запись в таблице с таким логином и паролем + полем юзер
+                            this.Hide();
+                            MainForm mf = new MainForm();
+                            mf.Show();
+                        }
+                    else
+                        MessageBox.Show("Данный пользователь не является менеджером");
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+            //}
             else
                 MessageBox.Show("Данные некорректны или пользователь не найден");
             //Ввод данных для авторизации и проверка существующего пользователя=====

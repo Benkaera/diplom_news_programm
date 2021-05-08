@@ -62,6 +62,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usertableUA)).BeginInit();
@@ -112,6 +113,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.usertableUA);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
@@ -139,6 +141,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1100, 601);
             this.panel1.TabIndex = 3;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // usertableUA
             // 
@@ -275,7 +278,7 @@
             this.dolzhUA.Items.AddRange(new object[] {
             "СисАдмин",
             "Директор",
-            "чу",
+            "Журналист",
             "Съемочная группа",
             "Монтажёр",
             "Выпускающий менеджер"});
@@ -457,6 +460,18 @@
             this.button1.Text = "Управление пользователями";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Century Schoolbook", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label11.Location = new System.Drawing.Point(771, 522);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 19);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "label11";
+            // 
             // AdminUserPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -510,5 +525,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.Label label11;
     }
 }
