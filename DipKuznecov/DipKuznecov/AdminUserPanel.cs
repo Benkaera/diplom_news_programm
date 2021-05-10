@@ -19,7 +19,9 @@ namespace DipKuznecov
         public AdminUserPanel()
         {
             InitializeComponent();
+
             LoadDataToTable(); //Вызов метода показа таблицы
+
         }
 
         public void LoadDataToTable() 
@@ -169,20 +171,7 @@ namespace DipKuznecov
                 { MessageBox.Show("Проверьте данные"); }
                 else
                 {
-                    //NameValueCollection UserInfo = new NameValueCollection();//API
-                    //UserInfo.Add("id", idUA.Text);
-                    //UserInfo.Add("login", loginUA.Text);
-                    //UserInfo.Add("pass", passUA.Text);
-                    //UserInfo.Add("familiya", famUA.Text);
-
-                    //UserInfo.Add("imya", imyaUA.Text);
-                    //UserInfo.Add("otchestvo", otchUA.Text);
-                    //UserInfo.Add("dolzhnost", dolzhUA.Text);
-                    //UserInfo.Add("role", roleUA.Text);
-
-                    //byte[] InsertUser = client.UploadValues("http://localhost:81/index.php", "POST", UserInfo);
-
-                    //client.Headers.Add("Content-Type", "binary/octet-stream");
+                    
 
                     string id = idUA.Text;
                     string login = loginUA.Text;
@@ -205,8 +194,9 @@ namespace DipKuznecov
                         LoadDataToTable();
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message);
-                MessageBox.Show(imyaUA.Text);
+            catch (Exception ex)
+            { 
+                MessageBox.Show(ex.Message);
             }
         }
 
