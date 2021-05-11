@@ -93,11 +93,16 @@ namespace DipKuznecov
         private void usertableUA_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // отображение ячеек таблицы в текстовых полях при нажатии
-
-            int i = e.RowIndex;
+            try
+            {
+                int i = e.RowIndex;
             DataGridViewRow row = usertableUA.Rows[i];
             idU.Text = row.Cells[0].Value.ToString();
-            
+            }
+            catch (Exception ex) 
+            { 
+               MessageBox.Show("Выбирайте только поля заявок");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -168,6 +173,13 @@ namespace DipKuznecov
         private void button5_Click(object sender, EventArgs e)
         {
             LoadDataToTable();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //кнопка график доходов
+            Grafic graf = new Grafic();
+            graf.Show();
         }
     }
 }
